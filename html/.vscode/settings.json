@@ -1,0 +1,9 @@
+{
+    "auto-close-tag.enableAutoCloseTag": true,
+"auto-close-tag.fullMode": true,
+"auto-close-tag.SublimeText3Mode": true,
+"html.format.indentInnerHtml": true,
+"html.format.endWithNewline": true,
+"html-css-class-completion.enableEmmetSupport": true,
+"html.suggest.html5": true
+}

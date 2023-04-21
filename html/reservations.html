@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=">
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.1/dist/css/datepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+    </head>
+    <style>
+        .swal2-actions {
+     position: relative;
+    z-index: 0 !important;
+    background-color: #e0d6d604;
+}
+    </style>
+
+    <body>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Tulith</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about.html">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Rooms
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/generals.html">Generals</a></li>
+                                <li><a class="dropdown-item" href="/majors.html">Majors</a></li>
+                                <li><a class="dropdown-item" href="/reservations.html">Reservations</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact.html" target="_blank">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </nav>
+        <section class="container">
+            <h1>check availability </h1>
+            <div class="row">
+                <div class="col">
+                    <div class="row" id="Reservation-date">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="arrival date" name="start">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="depature-date" name="end">
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <br>
+            <button type="submit" method="get" class="btn btn-primary">Search Availability</button>
+        </section>
+
+        <section class="container home-text">
+            <p>Welcome toScorching mood they flatterers old none that felt himnot, vile was but soils passed, vaunted of
+                oh if nor. Grace a peace heavenly me nor the. Shameless care into in did. Loved dwell shameless so was
+                are lines, uncouth the smile childe he relief ah or in oft, virtues the a him with ah,. </p>
+            <button id="Click" class="">
+                Click here
+            </button>
+        </section>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.1/dist/js/datepicker-full.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/notie"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+        <script>
+            let attention = Prompt()
+            const elem = document.getElementById('Reservation-date');
+            const rangepicker = new DateRangePicker(elem, {
+                // ...options
+            });
+
+
+
+            document.getElementById("Click").addEventListener("click", function () {
+                let myElem = document.getElementById("Click");
+                // myElem.classList.add("redText");
+                //  notify("this is my message", "success");
+                let html = `
+                <form id= "check-availability-form" action = "" method="post" novalidate class= "needs-validation">
+                    <div class="row" id ="Reservation-date-modal" >
+                <div class="col">
+                    <div class="row" id="Reservation-date">
+                        <div class="col">
+                            <input type="text" disabled class="form-control" placeholder="Arrival date" name="start" id="start">
+                        </div>
+                        <div class="col">
+                            <input type="text" disabled class="form-control" placeholder="Depature-date" name="end" id="end">
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+                    </form>
+                `
+                attention.custom({msg:html,title:"choose your date" });
+            })
+
+
+            function notify(msg, msgType) {
+                // notie.alert({
+                //     type: "success",
+                //     text: msg,
+                // })
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Do you want to continue',
+                    icon: 'error',
+                    confirmButtonText: 'Cool'
+                })
+            }
+
+            function notifyModal(title, text, icon, confirmButtonText) {
+
+
+                Swal.fire({
+                    title: title,
+                    text: text,
+                    icon: icon,
+                    confirmButtonText: confirmButtonText
+                })
+            }
+
+            function Prompt() {
+                let toast = function (c) {
+                    const {
+                        msg = "",
+                        position = "top-end",
+                        icon = "success",
+
+                    } = c;
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        title: msg,
+                        icon: icon,
+                        position: position,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+
+                    })
+                }
+
+                let success = function (c) {
+                    const {
+                        msg = "success",
+                        title = ""
+
+                    } = c
+                    Swal.fire({
+                        title: msg,
+                        text: '',
+                        icon: 'success',
+                    })
+                    Toast.fire({})
+                }
+
+                let Error = function (c) {
+                    const {
+                        msg = "",
+                        title = ""
+
+                    } = c
+                    Swal.fire({
+                        title: msg,
+                        text: '',
+                        icon: 'error',
+                    })
+                    Toast.fire({})
+
+                }
+                async function custom(c) {
+                    const {
+                        msg = "",
+                        title = "",
+                    } = c;
+                    const { value: formValues } = await Swal.fire({
+                        title: title,
+                        html:msg,
+                        focusConfirm: false,
+                        backdrop:true,
+                        showCancelButton: true,
+                        willOpen: () => {
+                            const  elem = document.getElementById("Reservation-date-modal");
+                            const rp = new DateRangePicker(elem,{
+                                format: "yyyy-MM-dd",
+                                showOnFocus: true,
+                            })
+                        },
+                        preConfirm: () => {
+                            return [
+                                document.getElementById('start').value,
+                                document.getElementById('end').value
+                            ]
+                        },
+                        didOpen:()=>{
+                            document.getElementById("start").removeAttribute("disabled");
+                            document.getElementById("end").removeAttribute("disabled");
+                        }
+                    })
+
+                    if (formValues) {
+                        Swal.fire(JSON.stringify(formValues))
+                    }
+
+                }
+
+                return {
+                    toast: toast,
+                    success: success,
+                    error: Error,
+                    custom:custom,
+                }
+            }
+
+
+        </script>
+
+    </body>
+
+</html>

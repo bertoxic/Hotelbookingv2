@@ -1,0 +1,12 @@
+mode: set
+github.com/bertoxic/bert/cmd/web/main.go:21.13,23.17 2 0
+github.com/bertoxic/bert/cmd/web/main.go:31.2,38.16 3 0
+github.com/bertoxic/bert/cmd/web/main.go:23.17,25.4 1 0
+github.com/bertoxic/bert/cmd/web/main.go:41.18,57.16 12 1
+github.com/bertoxic/bert/cmd/web/main.go:62.2,65.11 4 1
+github.com/bertoxic/bert/cmd/web/main.go:57.16,60.3 2 0
+github.com/bertoxic/bert/cmd/web/middleware.go:10.53,11.71 1 1
+github.com/bertoxic/bert/cmd/web/middleware.go:11.71,14.3 2 0
+github.com/bertoxic/bert/cmd/web/middleware.go:17.45,29.2 3 1
+github.com/bertoxic/bert/cmd/web/middleware.go:31.51,33.2 1 1
+github.com/bertoxic/bert/cmd/web/routes.go:12.49,35.2 19 1
