@@ -45,6 +45,7 @@
             document.getElementById("check-availability-button").addEventListener("click", function () {
                 let myElem = document.getElementById("check-availability-button");
                 // myElem.classList.add("redText");
+                // myElem.classList.add("redText");
                 //  notify("this is my message", "success");
                 let html = `
                     <form id= "check-availability-form" action = "" method="post" novalidate class= "needs-validation">
@@ -93,17 +94,18 @@
                             console.log(data);
                             if (data.ok) {
                                 console.log("room is available for rent")
+                                console.log(">>>>>>>",data.roomID)
                                 attention.custom({
                                     icon: "success",
-                                    msg:'<p>Room is available</p>'
-                                    
-                                    +'<p><a href="/Book-room?id='
-                                    + data.room_id
-                                    +'&s='
-                                    + data.start_date
-                                    +'&e='
-                                    +data.end_date
-                                    +'"class="btn-primary">Book now</a></p>',
+                                    msg:'<p>Room is available!</p>'
+                                        + '<p><a href="/Book-room?id='
+                                        + data.room_id
+                                        + '&s='
+                                        + data.start_date
+                                        + '&e='
+                                        + data.end_date
+                                        + '" class="btn btn-primary">'
+                                        + 'Book now!</a></p>',
                                     showConfirmButton:false,
                                 })
                             }else {

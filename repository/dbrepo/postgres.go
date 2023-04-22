@@ -155,7 +155,8 @@ func (m *postgresDBRepo) GetRoomByID(id int) (models.Room, error) {
 	)
 
 	if err != nil {
-		log.Println("error in postgres.go vvvvvvvvvvvvvvv", room.RoomName)
+		log.Println(err)
+		log.Println("error in postgres.go vvvvvvvvvvvvvvv", room.RoomName, err)
 		return room, err
 	}
 	if err = row.Err(); err != nil {
