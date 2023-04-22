@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 	"time"
-
+	"github.com/apex/gateway"
 	"github.com/alexedwards/scs/v2"
 
 	"github.com/bertoxic/bert/drivers"
@@ -26,7 +26,12 @@ var app config.AppConfig
 var infoLog *log.Logger
 var errorLog *log.Logger
 
+
 func main() {
+	listener := gateway.ListenAndServe
+	if portNumber != ":8081" {
+        listener = http.ListenAndServe
+    }
 	db, err := run()
 	if err != nil {
 		log.Println(err)
@@ -54,13 +59,15 @@ func main() {
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	srv := &http.Server{
-		Addr:    portNumber,
-		Handler: routes(&app),
-	}
+
+	// srv := &http.Server{
+	// 	Addr:    portNumber,
+	// 	Handler: routes(&app),
+	// }
 
 	//_ = http.ListenAndServe(portNumber, nil)
-	err = srv.ListenAndServe()
+	//err = srv.ListenAndServe()
+	listener(portNumber,routes(&app))
 	log.Fatal(err)
 }
 
