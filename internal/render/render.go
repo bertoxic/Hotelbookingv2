@@ -92,13 +92,13 @@ func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *models.Te
 
 func CreateTemplateCache() (map[string]*template.Template, error) {
 
-	myChache := map[string]*template.Template{}
+	myCache := map[string]*template.Template{}
 	//fmt.Println("page is currently xxxx ")
 	pages, err := filepath.Glob(fmt.Sprintf("%s/*.page.gtpl", pathToTemplate))
 	//fmt.Printf(fmt.Sprintf("zzzzzzzzzzzzzzz %d ", len(pages)))
 
 	if err != nil {
-		return myChache, err
+		return myCache, err
 
 	}
 	//fmt.Println("page is currently vvvvv ")
@@ -107,24 +107,24 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 		//	fmt.Println("page is currently kkkk")
 		ts, err := template.New(name).Funcs(functions).ParseFiles(page)
 		if err != nil {
-			return myChache, err
+			return myCache, err
 		}
 		matches, err := filepath.Glob(fmt.Sprintf("%s/*layout.gtpl", pathToTemplate))
 		//	fmt.Printf(fmt.Sprintf("aaaaaaaaaaa %d ", len(matches)))
 
 		if err != nil {
-			return myChache, err
+			return myCache, err
 		}
 
 		if len(matches) > 0 {
 			ts, err = ts.ParseGlob(fmt.Sprintf("%s/*layout.gtpl", pathToTemplate))
 			if err != nil {
-				return myChache, err
+				return myCache, err
 			}
 			//println(name)
 		}
 
-		myChache[name] = ts
+		myCache[name] = ts
 	}
-	return myChache, nil
+	return myCache, nil
 }

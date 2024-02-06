@@ -48,7 +48,7 @@ func testDB(d *sql.DB) ( error){
     return nil
 }
 //creates new database
-func NewDatabase(dsn string)(*sql.DB,error){
+func NewDatabase(dsn string)(*sql.DB, error){
     db, err := sql.Open("pgx",dsn)
     if err != nil {
         return  nil , err 

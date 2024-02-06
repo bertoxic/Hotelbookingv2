@@ -33,7 +33,7 @@ func SendMail(m models.MailData) {
 
 	client, err := server.Connect()
 	if err != nil {
-		errorLog.Println(err)
+		errorLog.Println("no client kkk",err)
 	}
 
 	email := mail.NewMSG()
@@ -52,7 +52,7 @@ func SendMail(m models.MailData) {
 
 	err = email.Send(client)
 	if err != nil {
-		log.Println(err)
+		log.Println("xzzzzzzzzzzzz",err)
 	} else {
 		log.Println("email sent")
 	}

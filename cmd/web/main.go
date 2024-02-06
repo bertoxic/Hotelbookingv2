@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 	"time"
-	"github.com/apex/gateway"
+	//"github.com/apex/gateway"
 	"github.com/alexedwards/scs/v2"
 
 	"github.com/bertoxic/bert/drivers"
@@ -28,10 +28,11 @@ var errorLog *log.Logger
 
 
 func main() {
-	listener := gateway.ListenAndServe
-	if portNumber != ":8081" {
-        listener = http.ListenAndServe
-    }
+	// listener := gateway.ListenAndServe
+	// if portNumber != ":8081" {
+    //     listener = http.ListenAndServe
+    // }
+	_ = os.Setenv("TZ", "America/Halifax")
 	db, err := run()
 	if err != nil {
 		log.Println(err)
@@ -49,25 +50,23 @@ func main() {
 	defer close(app.MailChan)
 	listenForMail()
 
-	// msg := models.MailData{
-	// 	To:      "me@gmail.com",
-	// 	From:    "ok@fmail.com",
-	// 	Subject: "Hellllo peoplre",
-	// 	Content: "",
-	// }
-	// app.MailChan  <-msg
+	msg := models.MailData{
+		To:      "me@gmail.com",
+		From:    "ok@fmail.com",
+		Subject: "Hellllo people",
+		Content: "",
+	}
+	app.MailChan <- msg
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-
-	// srv := &http.Server{
-	// 	Addr:    portNumber,
-	// 	Handler: routes(&app),
-	// }
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: routes(&app),
+	}
 
 	//_ = http.ListenAndServe(portNumber, nil)
-	//err = srv.ListenAndServe()
-	listener(portNumber,routes(&app))
+	err = srv.ListenAndServe()
 	log.Fatal(err)
 }
 
@@ -127,7 +126,7 @@ func run() (*drivers.DB, error) {
 		return nil, err
 	}
 
-	app.TemplateCache = tc
+	app.TemplateCache = tc 
  	repo := handlers.NewRepo(&app, db)
 	handlers.NewHandlers(repo)
 	helpers.NewHelpers(&app)

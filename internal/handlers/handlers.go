@@ -167,7 +167,7 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 	startDate, _ := time.Parse(layout, sd)
 
 	endDate, _ := time.Parse(layout, ed)
-
+ 
 	available, err := m.DB.SearchAvailabilityByDatesByRoomID(startDate, endDate, roomID)
 	if err != nil {
 		resp := jsonResponse{
@@ -192,7 +192,6 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(out)
-	//return
 }
 
 // Reservation renders the make a reservation page and displays form
@@ -342,7 +341,7 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		Content:  htmlMessages,
 		Template: "basic.html",
 	}
-	//	m.App.MailChan <- msg
+		m.App.MailChan <- msg
 
 	htmlMessages = fmt.Sprintf("<strong>Bertoxic Vents</strong> <br>Dear Admin a reservation has been made for <strong>%s</strong> from %s to %s. thank you", reservation.Room.RoomName, reservation.StartDate.Format("2006-01-02"), reservation.EndDate.Format("2006-01-02"))
 	//send Notifications
@@ -482,7 +481,7 @@ func (m *Repository) AdminDashboard(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "admin-dashboard.page.gtpl", &models.TemplateData{})
 }
 
-//Shows all new Reservartions in admin page
+//Shows all new Reservations in admin page
 func (m *Repository) AdminNewReservations(w http.ResponseWriter, r *http.Request) {
 	reservations, err := m.DB.AllNewReservations()
 	if err != nil {
@@ -532,7 +531,7 @@ func (m *Repository) AdminShowReservation(w http.ResponseWriter, r *http.Request
 	stringMap["src"] = src
 
 	year := r.URL.Query().Get("y")
-	month := r.URL.Query().Get("m")
+	month := r.URL.Query().Get("m")	
 	stringMap["year"] = year
 	stringMap["month"] = month
 
